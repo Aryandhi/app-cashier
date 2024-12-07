@@ -8,10 +8,12 @@ export class CartService {
         const product = productService.getProductUniqueProperty("code", code);
 
         if(!product){
-            return [];
+            window.alert("Invalid code product");
+            return;
         }
 
         this.carts.push({product, qty});
+        window.alert(`${product.name} added to cart (${qty} pcs).`)
     }
 
     showCart():void {
@@ -21,11 +23,10 @@ export class CartService {
         for (const cart of this.carts) {
             let subtotal = cart.product.price * cart.qty;
             total += subtotal;
-
             cartList += `${cart.product.name} - ${cart.qty}pcs - ${subtotal}\n`;
-
         }
         cartList += `Total: Rp${total}`;
+        window.alert(cartList);
     }
 
     pay(): void {
@@ -40,7 +41,7 @@ export class CartService {
             return acc + cart.product.price * cart.qty;
         }, 0);
 
-        const change = total - amount;
+        const change = amount - total;
         if(change < 0) {
             window.alert("No Enough Payment!");
             return;
