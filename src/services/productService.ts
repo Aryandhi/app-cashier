@@ -25,9 +25,15 @@ export class ProductService {
 
     ];
 
+    getProductUniqueProperty<T>(property: keyof Product, value: T) {
+        return this.products.find((product) => product[property] === value);
+    }
+
     getProduct(): string {
         return this.products.map((product) =>
         `${product.code} - ${product.name} - Rp${product.price}`)
         .join("\n");
     }
 }
+
+export const productService = new ProductService();
