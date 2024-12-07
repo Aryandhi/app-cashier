@@ -13,4 +13,18 @@ export class CartService {
 
         this.carts.push({product, qty});
     }
+
+    showCart():void {
+        let cartList = "Cart:\n";
+        let total = 0;
+
+        for (const cart of this.carts) {
+            let subtotal = cart.product.price * cart.qty;
+            total += subtotal;
+
+            cartList += `${cart.product.name} - ${cart.qty}pcs - ${subtotal}\n`;
+
+        }
+        cartList += `Total: Rp${total}`;
+    }
 }
