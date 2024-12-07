@@ -27,4 +27,26 @@ export class CartService {
         }
         cartList += `Total: Rp${total}`;
     }
+
+    pay(): void {
+        const amount = Number(window.prompt('Enter amount: '));
+
+        if(!amount) {
+            window.alert('Payment cancelled');
+            return;
+        }
+
+        const total = this.carts.reduce((acc, cart) => {
+            return acc + cart.product.price * cart.qty;
+        }, 0);
+
+        const change = total - amount;
+        if(change < 0) {
+            window.alert("No Enough Payment!");
+            return;
+        }
+
+        window.alert(`Payment success! change: ${change}`);
+        this.carts = [];
+    }
 }
