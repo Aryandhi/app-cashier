@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductService = void 0;
+exports.productService = exports.ProductService = void 0;
 class ProductService {
     constructor() {
         this.products = [
@@ -26,9 +26,13 @@ class ProductService {
             },
         ];
     }
+    getProductUniqueProperty(property, value) {
+        return this.products.find((product) => product[property] === value);
+    }
     getProduct() {
         return this.products.map((product) => `${product.code} - ${product.name} - Rp${product.price}`)
             .join("\n");
     }
 }
 exports.ProductService = ProductService;
+exports.productService = new ProductService();
